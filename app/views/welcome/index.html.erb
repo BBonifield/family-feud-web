@@ -1,2 +1,16 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div id="container">
+  <div id="main">
+    <header>
+      <%= image_tag 'logo.png' %>
+      <div class="phone">
+        <pre><%= TWILIO_CONFIG["incomming_phone_number"] %></pre>
+        <p>Text to join!</p>
+      </div>
+    </header>
+    <div id="content">
+      
+      <p class="notice">Hello duckies.</p>
+    
+    </div>
+  </div>
+</div>

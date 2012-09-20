@@ -1,0 +1,87 @@
+html, body {
+  width:100%;
+  height:100%;
+}
+
+#container {
+  width:100%;
+  height:100%;
+  text-align:center;
+}
+
+#main {
+  width:960px;
+  margin:0 auto;
+  text-align:left;
+  overflow:hidden;
+  border:1px solid #ccc;
+  border-top:none;
+}
+
+header {
+  text-align:left;
+  overflow:hidden;
+  padding:20px;
+  background: #0066cb; /* Old browsers */
+  background: -moz-linear-gradient(top,  #0066cb 0%, #002850 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0066cb), color-stop(100%,#002850)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #0066cb 0%,#002850 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #0066cb 0%,#002850 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #0066cb 0%,#002850 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #0066cb 0%,#002850 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0066cb', endColorstr='#002850',GradientType=0 ); /* IE6-9 */
+}
+
+header img {
+  float:left;
+}
+
+header div.phone {
+  width:490px;
+  float:right;
+  padding-top:26px;
+}
+
+header div.phone pre {
+  float:left;
+  padding:20px;
+  font-size:32px;
+  width:230px;
+}
+
+header div.phone p {
+  float:right;
+  width: 200px;
+  font-size:28px;
+  text-align:center;
+  padding-top:20px;
+  color:#fff;
+  text-shadow:2px 2px 2px #000;
+}
+
+#content {
+  float:left;
+  width:100%;
+  padding-top:20px;
+  min-height:600px;
+  background:url('background.png');
+  font-size:20px;
+}
+
+p.notice {
+  width:100%;
+  font-size:35px;
+  text-align:center;
+  color:#333;
+  padding:20px 0;
+  text-shadow:2px 2px 5px #666;
+}
+
+
+
+
+
+
+
+
+
