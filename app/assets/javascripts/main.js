@@ -6,6 +6,7 @@
 
   app.init = function() {
     app.createGame();
+    app.fadeStateNotice();
   };
 
   app.createGame = function() {
@@ -65,6 +66,14 @@
     $state_notice.fadeOut(function(){
       $state_notice.html(state);
       $state_notice.fadeIn();
+    });
+  };
+
+  app.fadeStateNotice = function() {
+    var $state_notice = $('#state_notice');
+    var speed = 800;
+    $state_notice.fadeOut(speed, function(){
+      $state_notice.fadeIn(speed, app.fadeStateNotice);
     });
   };
 
