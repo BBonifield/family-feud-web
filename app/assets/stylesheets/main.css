@@ -102,6 +102,35 @@ p#notice {
   line-height:42px;
 }
 
+ul#logos {
+  position:absolute;
+  left:0;
+  bottom:0;
+}
+
+ul#logos li {
+  float:left;
+  clear:none;
+  list-style:none;
+  width:50px;
+  height:50px;
+}
+
+li#arduino_logo {
+  background:url('arduino_logo.jpg');
+  background-size:100% 100%;
+}
+
+li#sparkfun_logo {
+  background:url('sparkfun_logo.png');
+  background-size:100% 100%;
+}
+
+li#twilio_logo {
+  background:url('twilio_logo.png');
+  background-size:100% 100%;
+}
+
 p#state_notice {
   position:absolute;
   right:12px;
