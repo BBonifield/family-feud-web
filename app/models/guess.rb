@@ -9,7 +9,7 @@ class Guess < ActiveRecord::Base
   def handle_score_update
     total = self.round.totals.where( "text = ? AND taken = ?", self.text, false ).first
     if total
-      self.round.player.score = self.round.player.score + total.entry_sum
+      self.round.player.update_attribute :score, self.round.player.score + total.entry_sum
       correct = true
     else
       correct = false

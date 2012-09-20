@@ -57,6 +57,7 @@ class Game < ActiveRecord::Base
     event :end_game do
       transition all => Game::STATE_GAME_OVER
     end
+    after_transition :to => Game::STATE_ROUND_6, :do => :notify_game_over
 
   end
 
@@ -136,6 +137,17 @@ class Game < ActiveRecord::Base
     end
 
     self.rounds.create :number => number, :player_id => player.id
+  end
+
+  def notify_game_over
+    player_1 = self.players.find_by_number 1
+    player_2 = self.players.find_by_number 2
+    if player_1.score > player_2.score
+      player_1.update_attribute :winner, true
+    else
+      player_2.update_attribute :winner, true
+    end
+    Pusher[ pusher_channel ].trigger!('game_over', self.players)
   end
 
 end
