@@ -74,6 +74,11 @@ div.player {
   color:#333;
 }
 
+div.player .score {
+  padding-left:20px;
+  font-size:24px;
+}
+
 #player1 {
   float:left;
 }
@@ -93,6 +98,15 @@ p#notice {
   line-height:42px;
 }
 
+p#state_notice {
+  position:absolute;
+  right:12px;
+  bottom:10px;
+  font-size:12px;
+  text-transform:uppercase;
+  margin:0;
+  font-weight:bold;
+}
 
 
 

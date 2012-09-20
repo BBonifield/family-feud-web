@@ -8,11 +8,12 @@
 
   app.createGame = function() {
     $.ajax({
-      url: "/game/create",
-      type: "post",
+      url: "/games/create",
+      type: "get",
       dataType: "json",
       success: function(resp) {
         console.log(resp);
+        app.changeStateNotice(resp.state);
       }
     });
   };
@@ -36,6 +37,14 @@
     $notice.fadeOut(function(){
       $notice.html(text);
       $notice.fadeIn();
+    });
+  };
+
+  app.changeStateNotice = function(state) {
+    var $state_notice = $('#state_notice');
+    $state_notice.fadeOut(function(){
+      $state_notice.html(state);
+      $state_notice.fadeIn();
     });
   };
 
