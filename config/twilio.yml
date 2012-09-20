@@ -1,0 +1,11 @@
+defaults: &defaults
+  sid: "AC1ddc8c696f7085a0fac0556e6f1c2666"
+  auth_token: "b60d24f0d77ebefa20205afd595184b5"
+  incomming_phone_number: "303-747-6741"
+development:
+  <<: *defaults
+test:
+  <<: *defaults
+production:
+  <<: *defaults
+  incomming_phone_number: "303-647-4184"
