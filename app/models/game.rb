@@ -11,51 +11,51 @@ class Game < ActiveRecord::Base
 
   attr_accessible :state
 
-  state_machine :state, :initial => Game::STATE_AWAITING_PLAYERS.to_sym do
+  state_machine :state, :initial => Game::STATE_AWAITING_PLAYERS do
 
-    before_transition :to => Game::STATE_PLAYERS_SELECTED.to_sym, :do => :generate_players
+    before_transition :to => Game::STATE_PLAYERS_SELECTED, :do => :generate_players
     event :select_players do
-      transition all => Game::STATE_PLAYERS_SELECTED.to_sym
+      transition all => Game::STATE_PLAYERS_SELECTED
     end
 
-    before_transition :to => Game::STATE_ROUND_1.to_sym, :do => :generate_round_1
+    before_transition :to => Game::STATE_ROUND_1, :do => :generate_round_1
     event :begin_round_1 do
-      transition all => Game::STATE_ROUND_1.to_sym
+      transition all => Game::STATE_ROUND_1
     end
-    after_transition :to => Game::STATE_ROUND_1.to_sym, :do => :notify_round_start_1
+    after_transition :to => Game::STATE_ROUND_1, :do => :notify_round_start_1
 
-    before_transition :to => Game::STATE_ROUND_2.to_sym, :do => :generate_round_2
+    before_transition :to => Game::STATE_ROUND_2, :do => :generate_round_2
     event :begin_round_2 do
-      transition all => Game::STATE_ROUND_2.to_sym
+      transition all => Game::STATE_ROUND_2
     end
-    after_transition :to => Game::STATE_ROUND_2.to_sym, :do => :notify_round_start_2
+    after_transition :to => Game::STATE_ROUND_2, :do => :notify_round_start_2
 
-    before_transition :to => Game::STATE_ROUND_3.to_sym, :do => :generate_round_3
+    before_transition :to => Game::STATE_ROUND_3, :do => :generate_round_3
     event :begin_round_3 do
-      transition all => Game::STATE_ROUND_3.to_sym
+      transition all => Game::STATE_ROUND_3
     end
-    after_transition :to => Game::STATE_ROUND_3.to_sym, :do => :notify_round_start_3
+    after_transition :to => Game::STATE_ROUND_3, :do => :notify_round_start_3
 
-    before_transition :to => Game::STATE_ROUND_4.to_sym, :do => :generate_round_4
+    before_transition :to => Game::STATE_ROUND_4, :do => :generate_round_4
     event :begin_round_4 do
-      transition all => Game::STATE_ROUND_4.to_sym
+      transition all => Game::STATE_ROUND_4
     end
-    after_transition :to => Game::STATE_ROUND_4.to_sym, :do => :notify_round_start_4
+    after_transition :to => Game::STATE_ROUND_4, :do => :notify_round_start_4
 
-    before_transition :to => Game::STATE_ROUND_5.to_sym, :do => :generate_round_5
+    before_transition :to => Game::STATE_ROUND_5, :do => :generate_round_5
     event :begin_round_5 do
-      transition all => Game::STATE_ROUND_5.to_sym
+      transition all => Game::STATE_ROUND_5
     end
-    after_transition :to => Game::STATE_ROUND_5.to_sym, :do => :notify_round_start_5
+    after_transition :to => Game::STATE_ROUND_5, :do => :notify_round_start_5
 
-    before_transition :to => Game::STATE_ROUND_6.to_sym, :do => :generate_round_6
+    before_transition :to => Game::STATE_ROUND_6, :do => :generate_round_6
     event :begin_round_6 do
-      transition all => Game::STATE_ROUND_6.to_sym
+      transition all => Game::STATE_ROUND_6
     end
-    after_transition :to => Game::STATE_ROUND_6.to_sym, :do => :notify_round_start_6
+    after_transition :to => Game::STATE_ROUND_6, :do => :notify_round_start_6
 
     event :end_game do
-      transition all => Game::STATE_GAME_OVER.to_sym
+      transition all => Game::STATE_GAME_OVER
     end
 
   end

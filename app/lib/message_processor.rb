@@ -69,7 +69,7 @@ class MessageProcessor
 
     # ensure that we only accept guesses from the proper player
     if linked_player && round.player == linked_player
-      round.guesses.create :text => payload[:text]
+      round.player.guesses.create :text => payload[:text]
     end
   end
 

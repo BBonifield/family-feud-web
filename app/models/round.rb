@@ -11,30 +11,31 @@ class Round < ActiveRecord::Base
 
   attr_accessible :game_id, :player_id, :state, :survey_text, :number
 
-  state_machine :state, :initial => Round::STATE_AWAITING_ENTRIES.to_sym do
+  state_machine :state, :initial => Round::STATE_AWAITING_ENTRIES do
 
+    before_transition :to => Round::STATE_GUESS_1, :do => :create_totals
     event :sum_entries do
-      transition all => Round::STATE_GUESS_1.to_sym
+      transition all => Round::STATE_GUESS_1
     end
 
     event :await_guess_2 do
-      transition all => Round::STATE_GUESS_2.to_sym
+      transition all => Round::STATE_GUESS_2
     end
     event :await_guess_3 do
-      transition all => Round::STATE_GUESS_3.to_sym
+      transition all => Round::STATE_GUESS_3
     end
     event :await_guess_4 do
-      transition all => Round::STATE_GUESS_4.to_sym
+      transition all => Round::STATE_GUESS_4
     end
     event :await_guess_5 do
-      transition all => Round::STATE_GUESS_5.to_sym
+      transition all => Round::STATE_GUESS_5
     end
     event :end_round do
-      transition all => Round::STATE_COMPLETE.to_sym
+      transition all => Round::STATE_COMPLETE
     end
 
     event :force_round_end do
-      transition all => Round::STATE_COMPLETE.to_sym
+      transition all => Round::STATE_COMPLETE
     end
 
   end
@@ -45,6 +46,22 @@ class Round < ActiveRecord::Base
     f.close
     surveys = c.split "\n"
     self.survey_text = surveys.sample
+  end
+
+  def create_totals
+    totals_hash = {}
+    entries.each do |entry|
+      if totals_hash.has_key? entry.text
+        totals_hash[entry.text] = totals_hash[entry.text] + 1
+      else
+        totals_hash[entry.text] = 1
+      end
+    end
+
+    totals_hash.each_pair do |text, sum|
+      self.totals.create :text => text, :entry_sum => sum
+    end
+
   end
 
   belongs_to :game
