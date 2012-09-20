@@ -1,12 +1,12 @@
-class PusherProcessor
+class StateProcessor
 
-  attr_accessor :payload
+  attr_accessor :active_game
 
-  def initialize incomming_payload
-    @payload = incomming_payload
+  def initialize use_game
+    @active_game = use_game
   end
 
-  def process
+  def advance
     # ignore if no active game
     if active_game
 
@@ -53,17 +53,15 @@ class PusherProcessor
       when Round::STATE_GUESS_5
         round.end_round
       when Round::STATE_COMPLETE
+        if round.number == 6
+          active_game.end_game
+        else
+          method = "begin_round_#{round.number+1}"
+          active_game.send method.to_sym
+        end
         # no action
       end
 
     end
-  end
-
-  def active_game
-    if @active_game.nil?
-      @active_game = Game.where("state != ?", Game::STATE_GAME_OVER).last
-    end
-
-    @active_game
   end
 end

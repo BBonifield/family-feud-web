@@ -9,7 +9,7 @@ class Round < ActiveRecord::Base
 
   before_create :set_survey_text
 
-  attr_accessible :game_id, :player_id, :state, :survey_text, :number, :player
+  attr_accessible :game_id, :player_id, :state, :survey_text, :number
 
   state_machine :state, :initial => Round::STATE_AWAITING_ENTRIES.to_sym do
 
