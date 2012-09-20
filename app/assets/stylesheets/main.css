@@ -142,6 +142,19 @@ p#state_notice {
   color:#004880;
 }
 
+#answer {
+  position:absolute;
+  top:50px;
+  left:350px;
+  height:200px;
+  width:300px;
+  background-color:#fff;
+  font-size:30px;
+  text-align:center;
+  border:2px solid #333;
+  color:#333;
+  display:none;
+}
 
 
 

@@ -40,6 +40,27 @@
     app.changeStateNotice(data.state);
   };
 
+  app.totalsAvailable = function(data) {
+    app.changeStateNotice("awaiting_player_guess");
+  };
+
+  app.guessReceived = function(data) {
+    if (data.correct) {
+      var $score = $('#player'+data.player.number).find('.score').text(data.player.score);
+      app.display('GOOD GUESS');
+    } else {
+      app.display('NOPE');
+    }
+  };
+
+  app.display = function(text) {
+    var $answer = $('#answer');
+    $answer.text(text);
+    $answer.fadeIn(function(){
+      setTimeout(function(){ $answer.fadeOut(5000); }, 3000);
+    });
+  };
+
   app.createChannel = function(id) {
     var pusher = new Pusher(window.pusher_key); // Replace with your app key
     var channel = pusher.subscribe('game_' + id);
@@ -47,6 +68,8 @@
 
     channel.bind('players_selected', app.setPlayers);
     channel.bind('round_started', app.startRound);
+    channel.bind('totals_available', app.totalsAvailable);
+    channel.bind('guess_received', app.guessReceived);
 
     channel.bind_all(function(data) {
       console.log(arguments)
