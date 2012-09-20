@@ -33,12 +33,19 @@
     app.changeStateNotice('players_selected');
   };
 
+  app.startRound = function(data) {
+    var question = "Question " + data.number + ": " + data.survey_text;
+    app.changeNotice(question);
+    app.changeStateNotice(data.state);
+  };
+
   app.createChannel = function(id) {
     var pusher = new Pusher(window.pusher_key); // Replace with your app key
     var channel = pusher.subscribe('game_' + id);
     app.game_channel = channel;
 
     channel.bind('players_selected', app.setPlayers);
+    channel.bind('round_started', app.startRound);
 
     channel.bind_all(function(data) {
       console.log(arguments)
