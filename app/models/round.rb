@@ -17,19 +17,19 @@ class Round < ActiveRecord::Base
       transition all => Round::STATE_GUESS_1.to_sym
     end
 
-    event :guess_1_received do
+    event :await_guess_2 do
       transition all => Round::STATE_GUESS_2.to_sym
     end
-    event :guess_2_received do
+    event :await_guess_3 do
       transition all => Round::STATE_GUESS_3.to_sym
     end
-    event :guess_3_received do
+    event :await_guess_4 do
       transition all => Round::STATE_GUESS_4.to_sym
     end
-    event :guess_4_received do
+    event :await_guess_5 do
       transition all => Round::STATE_GUESS_5.to_sym
     end
-    event :guess_5_received do
+    event :end_round do
       transition all => Round::STATE_COMPLETE.to_sym
     end
 
