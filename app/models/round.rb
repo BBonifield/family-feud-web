@@ -62,10 +62,12 @@ class Round < ActiveRecord::Base
       self.totals.create :text => text, :entry_sum => sum
     end
 
+    Pusher[ self.game.pusher_channel ].trigger!('totals_available', self.totals)
   end
 
   belongs_to :game
   belongs_to :player
   has_many :entries, :dependent => :destroy
   has_many :totals, :dependent => :destroy
+  has_many :guesses, :dependent => :destroy
 end
