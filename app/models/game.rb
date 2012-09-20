@@ -13,6 +13,7 @@ class Game < ActiveRecord::Base
 
   state_machine :state, :initial => Game::STATE_AWAITING_PLAYERS.to_sym do
 
+    before_transition :to => Game::STATE_PLAYERS_SELECTED.to_sym, :do => :generate_players
     event :select_players do
       transition all => Game::STATE_PLAYERS_SELECTED.to_sym
     end
@@ -45,4 +46,22 @@ class Game < ActiveRecord::Base
   has_many :player_requests, :dependent => :destroy
   has_many :players, :dependent => :destroy
   has_many :rounds, :dependent => :destroy
+
+
+  def pusher_channel
+    "game_#{self.id}"
+  end
+
+
+  def generate_players
+    selected_players = player_requests.sample(2).each_with_index do |player_request, i|
+      self.players.create({
+        :phone => player_request.phone,
+        :name => player_request.name,
+        :number => i+1
+      })
+    end
+    Pusher[ pusher_channel ].trigger!('players_selected', self.players)
+  end
+
 end

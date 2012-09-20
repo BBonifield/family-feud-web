@@ -1,7 +1,9 @@
 class MessageProcessor
 
-  def initialize payload
-    @payload = payload
+  attr_accessor :payload
+
+  def initialize incomming_payload
+    @payload = incomming_payload
   end
 
   def process
@@ -33,7 +35,7 @@ class MessageProcessor
   protected
 
   def create_player_request
-    PlayerRequest.create :name => payload[:body], :phone => payload[:from]
+    active_game.player_requests.create :name => payload[:text], :phone => payload[:from]
   end
 
   def process_round round_number
@@ -44,7 +46,7 @@ class MessageProcessor
       case round.state
       when Round::STATE_AWAITING_ENTRIES
         # track the entry for summation
-        round.entries.create :text => payload[:body], :phone => payload[:from]
+        round.entries.create :text => payload[:text], :phone => payload[:from]
       when Round::STATE_GUESS_1
         process_guess round, 1
       when Round::STATE_GUESS_2
@@ -67,7 +69,7 @@ class MessageProcessor
 
     # ensure that we only accept guesses from the proper player
     if linked_player && round.player == linked_player
-      round.guesses.create :text => payload[:body]
+      round.guesses.create :text => payload[:text]
     end
   end
 

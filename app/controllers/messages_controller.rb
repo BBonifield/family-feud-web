@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
       :text => params[:Body],
       :from => normalized_number(params[:From])
     }
-    raise payload.inspect
+    MessageProcessor.new(payload).process
   end
 
   protected

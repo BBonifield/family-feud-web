@@ -1,7 +1,7 @@
 defaults: &defaults
   app_id: "28062"
-  key: "627900c11e0cb1bad594"
-  secret: "414715421b2a50f93a64"
+  key: "8c3c4693e6fabd4c1120"
+  secret: "dc55c4c64b7f4176222c"
 development:
   <<: *defaults
 test:
@@ -9,3 +9,5 @@ test:
 production:
   <<: *defaults
   app_id: "28063"
+  key: "0adb5e7803810c10b73e"
+  secret: "eed63fc63ebb49355111"
