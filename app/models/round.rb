@@ -7,7 +7,9 @@ class Round < ActiveRecord::Base
   STATE_GUESS_5 = "guess_5"
   STATE_COMPLETE = "complete"
 
-  attr_accessible :game_id, :player_id, :state, :survey_text, :number
+  before_create :set_survey_text
+
+  attr_accessible :game_id, :player_id, :state, :survey_text, :number, :player
 
   state_machine :state, :initial => Round::STATE_AWAITING_ENTRIES.to_sym do
 
@@ -35,6 +37,14 @@ class Round < ActiveRecord::Base
       transition all => Round::STATE_COMPLETE.to_sym
     end
 
+  end
+
+  def set_survey_text
+    f = open "#{Rails.root}/app/lib/surveys.txt"
+    c = f.read
+    f.close
+    surveys = c.split "\n"
+    self.survey_text = surveys.sample
   end
 
   belongs_to :game
