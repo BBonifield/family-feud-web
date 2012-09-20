@@ -3,4 +3,5 @@ class Player < ActiveRecord::Base
 
   belongs_to :game
   has_many :guesses, :dependent => :destroy
+  has_many :rounds
 end
