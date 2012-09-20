@@ -1,5 +1,6 @@
 FamilyFeudWeb::Application.routes.draw do
-  resources :games, :only => [ :show, :create ]
+  get "games/create"
+  match "/games/:id" => "games#show"
 
   post "messages/received"
 
