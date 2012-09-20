@@ -82,14 +82,15 @@ div.player {
   float:right;
 }
 
-p.notice {
-  width:100%;
+p#notice {
+  width:920px;
   font-size:35px;
   text-align:center;
   color:#333;
   padding:100px 20px 0;
   text-shadow:2px 2px 5px #666;
   text-transform:uppercase;
+  line-height:42px;
 }
 
 
