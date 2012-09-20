@@ -69,6 +69,10 @@ class Game < ActiveRecord::Base
     "game_#{self.id}"
   end
 
+  def advance_state
+    StateProcessor.new(self).advance
+  end
+
 
   def generate_players
     selected_players = player_requests.sample(2).each_with_index do |player_request, i|
@@ -131,7 +135,7 @@ class Game < ActiveRecord::Base
       player = self.players.find_by_number new_player_number
     end
 
-    self.rounds.create :number => number, :player => player
+    self.rounds.create :number => number, :player_id => player.id
   end
 
 end

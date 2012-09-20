@@ -1,4 +1,6 @@
 FamilyFeudWeb::Application.routes.draw do
+  get "state/advance"
+
   get "pusher/received"
 
   get "games/create"
